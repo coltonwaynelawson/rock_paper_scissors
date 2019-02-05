@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Basic Javascript Example</title>
+  <style>
+    input {
+      font-size: 2em;
+      margin: 10px 1px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<p>Want to play Rock, Paper, Scissors?</p>
+<button onclick="game()">Click to play</button>
+
+<script>
+
+
+
+	function getComputerInput() {
+	  let possibleValues = ['rock', 'paper', 'scissors'];
+	  let computerInput = possibleValues[Math.floor(Math.random() * possibleValues.length)];
+	  return computerInput;
+	}
+
+
+	function getUserInput() {
+	  let userInput = prompt('Do you choose rock, paper, or scissors?');
+	  return userInput.toLowerCase();
+	}
+
+
+	function playGame(playerSelection, computerSelection) {
+	  playerSelection = getUserInput();
+	  computerSelection = getComputerInput();
+
+	  if (playerSelection == computerSelection) {
+	    console.log('The computer also selected ' + computerSelection + '. It\'s a tie, try again');
+	    return 'tieGame';
+
+	  } else if (playerSelection == 'rock') {
+	    if (computerSelection == 'scissors') {
+	      console.log('The computer selected ' + computerSelection + '. You win! Rock beats scissors.');
+	      return 'userWin';
+	    } else {
+	      console.log('The computer selected ' + computerSelection + '. You lose... Paper beats rock.');
+	      return 'computerWin';
+	    }
+
+	  } else if (playerSelection == 'paper') {
+	    if (computerSelection == 'rock') {
+	      console.log('The computer selected ' + computerSelection + '. You win! Paper beats rock.');
+	      return 'userWin';
+	    } else {
+	      console.log('The computer selected ' + computerSelection + '. You lose... Scissors beats paper.');
+	      return 'computerWin';
+	    }
+
+	  } else if (playerSelection == 'scissors') {
+	    if (computerSelection == 'paper') {
+	      console.log('The computer selected ' + computerSelection + '. You win! Scissors beats paper.');
+	      return 'userWin';
+	    } else {
+	      console.log('The computer selected ' + computerSelection + '. You lose... Rock beats scissors.');
+	      return 'computerWin';
+	    }
+	  }
+	}
+
+
+	function determineWinner(userScore, computerScore) {
+	  if (userScore > computerScore) {
+	    console.log('Congrats! You win with a score of ' + userScore + ' to ' + computerScore);
+	  } else if (computerScore > userScore) {
+	    console.log('You suck! You lost to a computer with a score of ' + userScore + ' to ' + computerScore);
+	  } else if (computerScore == userScore) {
+	    console.log('It\'s a tie. The score is ' + userScore + ' to ' + computerScore);
+	  }
+	}
+
+	function game() {
+	  let userScore = 0;
+	  let computerScore = 0;
+
+	  for (let i = 0; i < 5; i++) {
+	    let gameResult = playGame();
+	    if (gameResult == 'userWin') {
+	      userScore++;
+	    } else if (gameResult == 'computerWin') {
+	      computerScore++;
+	    }
+	  }
+	  determineWinner(userScore, computerScore)
+	}
+
+	</script>
+
+
+
+</body>
+
+</html>
